@@ -20,6 +20,24 @@ print(f"""\n\n\t__________________________________________
 \t|=========>Number Guessing Game<=========|
 \t|========================================|""")
 
+def play_again():
+    # ask if they want to play again.
+    prompt = input(f"""\t|===Would you like to play again?========|
+\t|===[y]es, [n]o==========================|
+\t|===>   <================================|{off_set}""")
+    if prompt.lower() == 'y':
+        print(f'''\t|===============High Score===============|
+        |=================>*{high_score}*<==================|''')
+        start_game()
+
+    elif prompt.lower() == 'n':
+        print(f"\t|===Thank you for playing.===============|")
+    else:
+        print(f'''\t|===Invalid input.=======================|
+        |===Please enter [y] for yes=============|
+        |===or [n] for no.=======================|''')
+        play_again()
+
 
 def start_game():
     """Psuedo-code Hints
@@ -42,18 +60,28 @@ def start_game():
 
     num_of_guess = 0
 
-
-
     answer = random.randrange(1,11)
+
     print(f"\t|===Guess the number between 1 and 10.===|")
 
 
     while True:
         global high_score
+        # found (global) on stack overflow inorder to bring the variable high_score
+        # to the correct scope.
         num_of_guess += 1
+        try:
+            guess = int(input(f"\t|===>   <================================|{off_set}" ))
+                    #needs an off-set of -36 to hit the center of =>  <=
+            if guess > 10 or guess < 0:
+                print(f'\t|=Please enter a number between 1 and 10=|')
+                continue
 
-        guess = int(input(f"\t|===>   <================================|{off_set}" ))
-                        #needs an off-set of -36 to hit the center of =>  <=
+        except ValueError:
+            print(f'''\t|===you failed to enter a valid number,==|
+        |===Please try again.====================|''')
+            continue
+
 
 
         if guess == answer:
@@ -72,14 +100,10 @@ def start_game():
         elif guess < answer:
             print(f"\t|===Its higher.==========================|")
 
-    prompt = input(f"""\t|===Would you like to play again?========|
-    \t|===[y]es, [n]o==========================|
-    \t|===>   <================================|{off_set}""")
-    if prompt == 'y':
-        start_game()
 
-    else:
-        print(f"\t|===Thank you for playing.===============|")
+
+
+    play_again()
 
 
 

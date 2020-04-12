@@ -31,7 +31,9 @@ def play_again():
         start_game()
 
     elif prompt.lower() == 'n':
-        print(f"\t|===Thank you for playing.===============|")
+        print(f'''\t|===Thank you for playing.===============|
+        |===============High Score===============|
+        |=================>*{high_score}*<==================|''')
     else:
         print(f'''\t|===Invalid input.=======================|
         |===Please enter [y] for yes=============|

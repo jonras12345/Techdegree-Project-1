@@ -5,7 +5,9 @@ Project 1 - Number Guessing Game
 
 For this first project we will be using Workspaces.
 
-NOTE: If you strongly prefer to work locally on your own computer, you can totally do that by clicking: File -> Download Workspace in the file menu after you fork the snapshot of this workspace.
+NOTE: If you strongly prefer to work locally on your own computer,
+you can totally do that by clicking: File -> Download Workspace
+in the file menu after you fork the snapshot of this workspace.
 
 """
 
@@ -26,20 +28,27 @@ def play_again():
 \t|===[y]es, [n]o==========================|
 \t|===>   <================================|{off_set}""")
     if prompt.lower() == 'y':
-        print(f'''\t|===============High Score===============|
-        |=================>*{high_score}*<==================|''')
+        print(f'''\t|========================================|
+        |==============*High Score*==============|
+        |=================>*{high_score}*<==================|
+        |========================================|''')
         start_game()
 
     elif prompt.lower() == 'n':
         print(f'''\t|===Thank you for playing.===============|
-        |===============High Score===============|
-        |=================>*{high_score}*<==================|''')
+        |==============*High Score*==============|
+        |=================>*{high_score}*<==================|
+        |========================================|''')
     else:
         print(f'''\t|===Invalid input.=======================|
         |===Please enter [y] for yes=============|
-        |===or [n] for no.=======================|''')
+        |===or [n] for no.=======================|
+        |========================================|''')
         play_again()
 
+
+def print_boxed(text):
+    print(f'\t|==={text}')
 
 def start_game():
     """Psuedo-code Hints
@@ -80,27 +89,29 @@ def start_game():
                 continue
 
         except ValueError:
-            print(f'''\t|===you failed to enter a valid number,==|
-        |===Please try again.====================|''')
+            print_boxed(f'you failed to enter a valid number,==|')
+            print_boxed('Please try again.====================|')
             continue
 
 
 
         if guess == answer:
-            print(f'\t|===Good job! it only took {num_of_guess} trys!=======|')
+            print(f'''\t|========================================|
+        |===Good job! it only took {num_of_guess} trys!=======|''')
             if num_of_guess < high_score:
                 high_score = num_of_guess
-                print(f'\t|===Your new high score is {high_score}=============|')
+                print_boxed(f'''Your new high score is {high_score}=============|
+        |========================================|''')
             elif num_of_guess >= high_score:
                 print(f'''\t|=You did not beat your high score of {high_score}.=|
-        |===please try again.====================|''')
+        |========================================|''')
             break
 
         elif guess > answer:
-            print(f"\t|===Its lower.===========================|")
+            print_boxed("Its lower.===========================|")
 
         elif guess < answer:
-            print(f"\t|===Its higher.==========================|")
+            print_boxed("Its higher.==========================|")
 
 
 
